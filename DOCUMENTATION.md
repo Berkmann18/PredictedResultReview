@@ -29,25 +29,27 @@ Finds the difference(s) in the 2D arrays (matrices).
 
 -   Throws **[Error][12]** Emptiness or different sizes in the matrices
 
+Returns **[Array][11]&lt;[Array][11]&lt;[Diff][13]>>** Matrice of differences
+
 ## fileToArr
 
 Asynchronously converts a file to an array.
 
 ### Parameters
 
--   `file` **[string][13]** Filename of an UTF-8 encoded file
--   `colDelimiter` **[string][13]** Character(s) that separate lines into entries (optional, default `','`)
--   `lineDelimiter` **[string][13]** Character(s) that separate each lines (optional, default `'\n'`)
+-   `file` **[string][14]** Filename of an UTF-8 encoded file
+-   `colDelimiter` **[string][14]** Character(s) that separate lines into entries (optional, default `','`)
+-   `lineDelimiter` **[string][14]** Character(s) that separate each lines (optional, default `'\n'`)
 
 ## Diff
 
 Differential indication
 
-Type: [Object][14]
+Type: [Object][15]
 
 ### Properties
 
--   `idx` **[number][15]** Index position of the difference
+-   `idx` **[number][16]** Index position of the difference
 -   `before` **any** Initial data
 -   `after` **any** New data
 
@@ -68,7 +70,7 @@ difference([0, 1, 2], [0, 1.1, 2]); //[{idx: 1, before: 1, after: 1.1}]
 
 -   Throws **[Error][12]** Empty array(s)
 
-Returns **[Array][11]&lt;[Diff][16]>** List of differences
+Returns **[Array][11]&lt;[Diff][13]>** List of differences
 
 [1]: #diff
 
@@ -94,10 +96,10 @@ Returns **[Array][11]&lt;[Diff][16]>** List of differences
 
 [12]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
 
-[13]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[13]: #diff
 
-[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[16]: #diff
+[16]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
