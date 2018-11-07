@@ -1,0 +1,18 @@
+Software	Rate	Decisive Rate	Yes/No Rate	WIP Rate
+GMDH Streamline	100.00%	100.00%	88.24%	11.76%
+Cortana Intelligence	64.71%	29.41%	29.41%	0.00%
+ArcherPoint	100.00%	100.00%	100.00%	0.00%
+K3	23.53%	17.65%	17.65%	0.00%
+AGR 6	100.00%	100.00%	100.00%	0.00%
+NETSTOCK	100.00%	100.00%	94.12%	5.88%
+SO99+	100.00%	100.00%	100.00%	0.00%
+Smart Inventory Planning & Optimization	100.00%	100.00%	100.00%	0.00%
+Demand Planning (formerly AFP)	100.00%	100.00%	100.00%	0.00%
+IBM SPSS Statistics?	29.41%	11.76%	11.76%	0.00%
+IBM SPSS Modeler?	29.41%	11.76%	11.76%	0.00%
+BOARD	100.00%	100.00%	88.24%	11.76%
+RapidMiner	88.24%	82.35%	82.35%	0.00%
+SAS Advanced Analytics?	41.18%	17.65%	17.65%	0.00%
+SofCo..	100.00%	100.00%	94.12%	5.88%
+NAV Bevica	64.71%	52.94%	52.94%	0.00%
+Average	78.43%	71.37%	69.02%	2.35%
