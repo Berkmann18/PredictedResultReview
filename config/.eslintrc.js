@@ -1,38 +1,37 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
+  env: {
+    browser: true,
+    es6: true,
+    node: true
   },
-  "plugins": [
-      "security"
+  extends: [
+      'plugin:security/recommended',
+      'plugin:vue/essential',
+      '@vue/standard'
   ],
-  "extends": [
-      "plugin:security/recommended"
-  ],
-  "rules": {
-    "indent": [
-      "error",
+  rules: {
+    indent: [
+      'error',
       2
     ],
-    "linebreak-style": [
-      "error"
+    'linebreak-style': [
+      'error'
     ],
-    "no-console": "off",
-    "no-extra-semi": "off",
-    "prefer-const": "off",
-    "quotes": [
-      "error",
-      "single"
+    'no-console': 'off',
+    'no-extra-semi': 'off',
+    'prefer-const': 'off',
+    quotes: [
+      'error',
+      'single'
     ],
-    "no-trailing-spaces": [
-      "error"
+    'no-trailing-spaces': [
+      'error'
     ],
-    "symbol-description": [
-      "warn"
+    'symbol-description': [
+      'warn'
     ]
   },
-  "parserOptions": {
-    "sourceType": "module"
+  parserOptions: {
+    sourceType: 'module'
   }
 };

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @fileoverview Main script for the package.
@@ -6,8 +6,9 @@
  */
 /* eslint-env node, es6 */
 
-const fs = require('fs'),
-  { error } = require('nclr');
+const fs = require('fs')
+
+const { error } = require('nclr')
 
 /**
  * @description Asynchronously converts a file to an array.
@@ -19,17 +20,17 @@ const fs = require('fs'),
 const fileToArr = (file, colDelimiter = ',', lineDelimiter = '\n') => {
   return new Promise((resolve, reject) => {
     fs.readFile(file, 'utf8', (err, data) => {
-      if (err) error('FS error:', err) && reject(err);
+      if (err) error('FS error:', err) && reject(err)
 
-      let lines = data.split(lineDelimiter);
+      let lines = data.split(lineDelimiter)
       const treatLine = line => {
         return line.split(colDelimiter)
-          .map(val => val.replace(/\r|\n/g, ''));
+          .map(val => val.replace(/\r|\n/g, ''))
       }
-      resolve(lines.map(treatLine));
-    });
-  });
-};
+      resolve(lines.map(treatLine))
+    })
+  })
+}
 
 /**
  * Differential indication
@@ -48,15 +49,17 @@ const fileToArr = (file, colDelimiter = ',', lineDelimiter = '\n') => {
  * @throws {Error} Empty array(s)
  */
 const difference = (arr0, arr1) => {
-  if (!arr0.length || !arr1.length) throw new Error('Empty array(s)');
+  if (!arr0.length || !arr1.length) throw new Error('Empty array(s)')
 
-  let res = [];
+  let res = []
   for (let i = 0; i < arr0.length; ++i) {
-    if (arr0[i] !== arr1[i]) res.push({
-      idx: i,
-      before: arr0[i],
-      after: arr1[i]
-    });
+    if (arr0[i] !== arr1[i]) {
+      res.push({
+        idx: i,
+        before: arr0[i],
+        after: arr1[i]
+      })
+    }
   }
   return res
 }
@@ -69,12 +72,12 @@ const difference = (arr0, arr1) => {
  * @throws {Error} Emptiness or different sizes in the matrices
  */
 const diff = (mtx0, mtx1) => {
-  if (!mtx0.length || mtx0.length !== mtx1.length) throw new Error('Either the matrices are empty or of a different size');
+  if (!mtx0.length || mtx0.length !== mtx1.length) throw new Error('Either the matrices are empty or of a different size')
 
-  let res = [];
-  for (let i = 0; i < mtx0.length; ++i) res[i] = difference(mtx0[i], mtx1[i]);
+  let res = []
+  for (let i = 0; i < mtx0.length; ++i) res[i] = difference(mtx0[i], mtx1[i])
 
-  return res;
-};
+  return res
+}
 
 module.exports = { fileToArr, difference, diff }
