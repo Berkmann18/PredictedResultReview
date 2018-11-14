@@ -16,15 +16,24 @@
     </v-toolbar>
     <v-card>
       <v-container fluid>
-        <!-- @todo Check if this renders properly, maybe check out https://github.com/Shenmin-Z/lined-textarea -->
-        <span
-          v-for="line in lineCount"
-          :key="line"
-          >
-        </span>
-        <v-textarea
-          v-model="text"
-        ></v-textarea>
+        <!-- @todo Check if this renders properly, maybe check out https://github.com/Shenmin-Z/lined-textarea (cf. my fork) -->
+        <v-layout row>
+          <v-flex d-flex xs1>
+            <v-layout column>
+              <span
+                v-for="line in lineCount"
+                :key="line"
+                >
+                {{line}}
+              </span>
+            </v-layout>
+          </v-flex>
+          <v-textarea
+            v-model="textZone"
+            xs11
+          ></v-textarea>
+        </v-layout>
+        <!-- <span>Line count: {{lineCount}}</span> -->
       </v-container>
     </v-card>
   </div>
@@ -38,12 +47,20 @@ export default {
   },
   data () {
     return {
-      text: ''
+      text: 'Lorem'
     }
   },
   computed: {
-    lineCount: () => {
-      return this.text.length ? this.text.split(/\r\n|\r|\n/).length : 0;
+    textZone: {
+      get () {
+        return this.text
+      },
+      set (value) {
+        this.text = value
+      }
+    },
+    lineCount () {
+      return this.text.length ? this.text.split(/\r\n|\r|\n/).length : 0
     }
   }
 }
