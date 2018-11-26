@@ -39,6 +39,7 @@
 <script>
 import Panel from './components/Panel'
 import PanelDiff from './components/PanelDiff'
+// import LinedPanel from './components/LinedPanel'
 
 export default {
   name: 'App',
@@ -48,7 +49,13 @@ export default {
   },
   data () {
     return {
-      //
+      content: '',
+      disable: false,
+      height: 300,
+      nowrap: 'false',
+      resize: 'both',
+      validateName: 'none',
+      width: 450
     }
   }
 }

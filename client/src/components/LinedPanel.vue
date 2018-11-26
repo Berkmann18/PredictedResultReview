@@ -18,20 +18,12 @@
       <v-container fluid>
         <!-- @todo Check if this renders properly, maybe check out https://github.com/Shenmin-Z/lined-textarea (cf. my fork) -->
         <v-layout row>
-          <v-flex d-flex xs1>
-            <v-layout column>
-              <span
-                v-for="line in lineCount"
-                :key="line"
-                >
-                {{line}}
-              </span>
-            </v-layout>
-          </v-flex>
-          <v-textarea
-            v-model="textZone"
-            xs11
-          ></v-textarea>
+          <lined-v-textarea
+            :disabled="disable"
+            :nowrap="nowrap === 'true'"
+            :styles="{ height: `100%`, width: `100%`, resize }"
+            v-model="content"
+          ></lined-v-textarea>
         </v-layout>
         <!-- <span>Line count: {{lineCount}}</span> -->
       </v-container>
@@ -40,14 +32,19 @@
 </template>
 
 <script>
+import LinedVTextarea from './LinedVTextarea.vue'
+
 export default {
-  name: 'Panel',
+  name: 'LinedPanel',
+  components: {
+    LinedVTextarea
+  },
   props: {
     title: String
   },
   data () {
     return {
-      text: ''
+      text: 'Lorem'
     }
   },
   computed: {

@@ -17,7 +17,22 @@
     <!-- Perhaps have it line-numbered -->
     <v-card>
       <v-container fluid>
-        <div id="diff"></div>
+        <v-layout row>
+          <v-flex d-flex xs1>
+            <v-layout column>
+              <span
+                v-for="line in lineCount"
+                :key="line"
+                >
+                {{line}}
+              </span>
+            </v-layout>
+          </v-flex>
+          <div
+            id="diff"
+            xs11
+          ></div>
+        </v-layout>
       </v-container>
     </v-card>
   </div>
@@ -41,5 +56,10 @@ export default {
   .minus { //red accent-3
     background-color: #ff8080;
     color: #f00;
+  }
+
+  #diff {
+    margin: .5rem;
+    min-height: 9rem;
   }
 </style>
