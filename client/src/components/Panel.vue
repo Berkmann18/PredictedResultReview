@@ -24,7 +24,7 @@
                 v-for="line in lineCount"
                 :key="line"
                 >
-                {{line}}
+                {{ line }}
               </span>
             </v-layout>
           </v-flex>
@@ -43,20 +43,24 @@
 export default {
   name: 'Panel',
   props: {
-    title: String
+    title: String,
+    storeField: String
   },
   data () {
     return {
-      text: ''
+      text: '',
+      field: this.storeField.charAt(0).toUpperCase() + this.storeField.substr(1)
     }
   },
   computed: {
     textZone: {
       get () {
-        return this.text
+        return this.text // this.$store.state.old|current|forecast
       },
       set (value) {
         this.text = value
+        console.log(`"Updating storeField=${this.field} with value=${value}`, this.$store.getters[this.storeField])
+        this.$store.commit(`update${this.field}`, value)
       }
     },
     lineCount () {

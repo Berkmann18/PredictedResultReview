@@ -31,7 +31,10 @@
           <div
             id="diff"
             xs11
-          ></div>
+          >
+          Old: {{ $store.getters.old }}<br>
+          Current: {{ $store.getters.current }}
+          </div>
         </v-layout>
       </v-container>
     </v-card>
@@ -43,6 +46,24 @@ export default {
   name: 'PanelDiff',
   props: {
     title: String
+  },
+  data () {
+    return {
+      text: ''
+    }
+  },
+  computed: {
+    textZone: {
+      get () {
+        return this.text
+      },
+      set (value) {
+        this.text = value
+      }
+    },
+    lineCount () {
+      return this.text.length ? this.text.split(/\r\n|\r|\n/).length : 0
+    }
   }
 }
 </script>
