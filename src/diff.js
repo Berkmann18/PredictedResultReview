@@ -9,8 +9,6 @@
 const fs = require('fs')
 const { error } = require('nclr')
 
-const { error } = require('nclr')
-
 /**
  * @description Gets the matrix equivalent of a string.
  * @param {string} data Data to to convert
