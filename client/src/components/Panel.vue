@@ -59,7 +59,7 @@ export default {
       },
       set (value) {
         this.text = value
-        console.log(`"Updating storeField=${this.field} with value=${value}`, this.$store.getters[this.storeField])
+        // console.log(`"Updating storeField="${this.field}" with value="${value}"`)
         this.$store.commit(`update${this.field}`, value)
       }
     },
