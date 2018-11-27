@@ -6,8 +6,8 @@
  */
 /* eslint-env node, es6 */
 
-const fs = require('fs')
-const { error } = require('nclr')
+import { fs } from 'fs'
+import { error } from 'nclr'
 
 /**
  * @description Gets the matrix equivalent of a string.
@@ -89,4 +89,4 @@ const diff = (mtx0, mtx1) => {
   return res
 }
 
-module.exports = { strToMtx, fileToArr, difference, diff }
+export { fileToArr, diff }
