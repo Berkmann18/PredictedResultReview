@@ -24,7 +24,7 @@
                 v-for="line in lineCount"
                 :key="line"
                 >
-                {{line}}
+                {{ line }}
               </span>
             </v-layout>
           </v-flex>
@@ -32,9 +32,10 @@
             id="diff"
             xs11
           >
-          Old: {{ $store.getters.old }}<br>
-          Current: {{ $store.getters.current }}
+          {{ diffOldCur }}
           </div>
+          <!-- Old: {{ oldText }}<br>
+          Current: {{ currentText }} -->
         </v-layout>
       </v-container>
     </v-card>
@@ -42,6 +43,8 @@
 </template>
 
 <script>
+import { strToMtx, diff } from '@/plugins/diff'
+
 export default {
   name: 'PanelDiff',
   props: {
@@ -63,6 +66,39 @@ export default {
     },
     lineCount () {
       return this.text.length ? this.text.split(/\r\n|\r|\n/).length : 0
+    },
+    oldText () {
+      // console.log('Old')
+      // console.dir(this.$store.getters.old.split(/\n/g))
+      return this.$store.getters.old// .replace(/\r\n|\r|\n/g, '\n')
+    },
+    currentText () {
+      return this.$store.getters.current// .replace(/\r\n|\r|\n/g, '<br>')
+    },
+    diffOldCur () {
+      let old = strToMtx(this.oldText, ' ')
+      let cur = strToMtx(this.currentText, ' ')
+      let emptyOld = old.toString() === ''
+
+      let emptyCur = cur.toString() === ''
+      console.info('old:', emptyOld)
+      console.table(old)
+      console.info('cur:', emptyCur)
+      console.table(cur)
+      let dif = (emptyOld && emptyCur) ? null : diff(old, cur)
+      console.log('dif=', dif)
+      // let delta = JSON.parse(JSON.stringify(old)); //copy `old`
+      // then go through dif and change
+
+      // Transform the matrix `old` into a lined text
+      let res = `<table>`
+      if (!emptyOld) {
+        console.log('Old is empty?', emptyOld)
+        old.forEach((line, idx) => {
+          res += `<tr><td class="line">${line}</td>${line.split(' ').map(col => '<td>' + col + '</td>')}</tr>`
+        })
+      }
+      return `${res}</table>`
     }
   }
 }
