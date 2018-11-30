@@ -89,4 +89,4 @@ const diff = (mtx0, mtx1) => {
   return res
 }
 
-export { fileToArr, diff }
+export { fileToArr, strToMtx, diff }
