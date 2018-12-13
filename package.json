@@ -12,8 +12,6 @@
     "doc:lint": "documentation lint src/**",
     "doc:md": "documentation build src/** -f md -o DOCUMENTATION.md",
     "doc": "npm run doc:lint && npm run doc:md",
-    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "version": "npm run changelog && git add CHANGELOG.md",
     "commit": "git-cz",
     "lint:md": "remark . .github -i ./config/.remarkignore",
     "lint": "npm run fmt && npm run lint:md",
@@ -35,7 +33,10 @@
     "table",
     "result"
   ],
-  "author": "Berkmann18",
+  "author": {
+		"name": "Maximilian Berkmann",
+		"email": "maxieberkmann@gmail.com"
+	},
   "license": "MIT",
   "dependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
@@ -46,10 +47,14 @@
     "nclr": "^1.2.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.1",
+    "@semantic-release/git": "^7.0.5",
     "cz-adapter-eslint": "^0.1.2",
     "documentation": "^9.0.0",
     "eslint": "^5.10.0",
     "eslint-plugin-security": "^1.4.0",
+    "conventional-changelog-eslint": "^3.0.1",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.4.0",
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
