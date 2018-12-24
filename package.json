@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.1",
-    "@semantic-release/git": "^7.0.5",
+    "@semantic-release/git": "^7.0.6",
     "conventional-changelog-eslint": "^3.0.1",
     "cz-adapter-eslint": "^0.1.2",
     "documentation": "^9.1.1",
