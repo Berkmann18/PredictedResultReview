@@ -7,16 +7,19 @@
     "prr": "./index.js"
   },
   "scripts": {
-    "test": "jest",
-    "fmt": "eslint -c ./config/.eslintrc.js *.js src/*.js --fix",
+    "test": "snyk test && jest",
+    "fmt": "eslint -c ./config/.eslintrc.js *.js src/*.js --fix --ignore-pattern '!client/.eslintrc.js'",
     "doc:lint": "documentation lint src/**",
     "doc:md": "documentation build src/** -f md -o DOCUMENTATION.md",
     "doc": "npm run doc:lint && npm run doc:md",
     "commit": "git-cz",
     "lint:md": "remark . .github -i ./config/.remarkignore",
     "lint": "npm run fmt && npm run lint:md",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "snyk protect",
+    "contribs:add": "all-contributors add",
+    "contribs:generate": "all-contributors generate",
+    "contribs:check": "all-contributors check"
   },
   "repository": {
     "type": "git",
@@ -46,10 +49,12 @@
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
+    "all-contributors-cli": "^5.6.1",
     "conventional-changelog-eslint": "^3.0.1",
     "cz-adapter-eslint": "^0.1.2",
     "documentation": "^9.0.0",
     "eslint": "^5.10.0",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-you-dont-need-lodash-underscore": "^6.4.0",
     "husky": "^1.2.1",
@@ -59,8 +64,7 @@
     "remark-preset-lint-consistent": "^2.0.2",
     "remark-preset-lint-recommended": "^3.0.2",
     "semantic-release": "^15.12.5",
-    "snyk": "^1.117.1",
-    "travis-deploy-once": "^5.0.10"
+    "snyk": "^1.120.1"
   },
   "jest": {
     "collectCoverage": true,
