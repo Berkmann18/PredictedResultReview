@@ -32,7 +32,17 @@
             id="diff"
             xs11
           >
-          {{ diffOldCur }}
+          <table id="diffTab" cellspacing="0" cellpadding="4px">
+            <tr
+              v-for="row in diffOldCur"
+              :key="row[0]">
+              <td
+                v-for="entry in row"
+                :key="entry">
+                {{entry}}
+              </td>
+            </tr>
+          </table>
           </div>
           <!-- Old: {{ oldText }}<br>
           Current: {{ currentText }} -->
@@ -81,9 +91,9 @@ export default {
       let emptyOld = old.toString() === ''
 
       let emptyCur = cur.toString() === ''
-      console.info('old:', emptyOld)
+      // console.info('old:', emptyOld)
       console.table(old)
-      console.info('cur:', emptyCur)
+      // console.info('cur:', emptyCur)
       console.table(cur)
       let dif = (emptyOld && emptyCur) ? null : diff(old, cur)
       console.log('dif=', dif)
@@ -91,14 +101,18 @@ export default {
       // then go through dif and change
 
       // Transform the matrix `old` into a lined text
-      let res = `<table>`
+      let res = []
       if (!emptyOld) {
         console.log('Old is empty?', emptyOld)
-        old.forEach((line, idx) => {
-          res += `<tr><td class="line">${line}</td>${line.split(' ').map(col => '<td>' + col + '</td>')}</tr>`
+        // console.log('old=', old)
+        res = old.map((line, idx) => {
+          // console.log('line=', line, '#', idx)
+          // res += `<tr><td class="line">${idx}</td>${line.length ? line/* .split(' ') */.map(col => '<td>' + col + '</td>') : `<td>${line}</td>`}</tr>`
+          return [idx, line.join(' ')]
         })
       }
-      return `${res}</table>`
+      console.log('res=', res)
+      return res
     }
   }
 }
@@ -118,5 +132,12 @@ export default {
   #diff {
     margin: .5rem;
     min-height: 9rem;
+  }
+
+  #diffTab {
+    border: 1px solid #000;
+    td {
+      border: 1px solid #000;
+    }
   }
 </style>
