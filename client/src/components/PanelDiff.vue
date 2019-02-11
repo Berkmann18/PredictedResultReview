@@ -54,6 +54,7 @@
 
 <script>
 import { strToMtx, diff } from '@/plugins/diff'
+import { fillEqual } from '@/plugins/utils'
 
 export default {
   name: 'PanelDiff',
@@ -86,8 +87,9 @@ export default {
       return this.$store.getters.current// .replace(/\r\n|\r|\n/g, '<br>')
     },
     diffOldCur () {
-      let old = strToMtx(this.oldText, ' ')
-      let cur = strToMtx(this.currentText, ' ')
+      const _old = strToMtx(this.oldText, ' ')
+      const _cur = strToMtx(this.currentText, ' ')
+      const { a: old, b: cur } = fillEqual(_old, _cur)
       let emptyOld = old.toString() === ''
 
       let emptyCur = cur.toString() === ''
@@ -95,6 +97,7 @@ export default {
       console.table(old)
       // console.info('cur:', emptyCur)
       console.table(cur)
+
       let dif = (emptyOld && emptyCur) ? null : diff(old, cur)
       console.log('dif=', dif)
       // let delta = JSON.parse(JSON.stringify(old)); //copy `old`
