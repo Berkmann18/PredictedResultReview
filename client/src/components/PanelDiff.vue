@@ -35,11 +35,13 @@
           <table id="diffTab" cellspacing="0" cellpadding="4px">
             <tr
               v-for="row in diffOldCur"
-              :key="row[0]">
-              <td
-                v-for="entry in row"
-                :key="entry">
-                {{entry}}
+              :key="row.idx"
+              :class="{ plus: row.type === 'add', minus: row.type === 'remove' }">
+              <td>
+                {{row.idx}}
+              </td>
+              <td>
+                {{row.line}}
               </td>
             </tr>
           </table>
@@ -53,8 +55,8 @@
 </template>
 
 <script>
-import { strToMtx, diff } from '@/plugins/diff'
-import { fillEqual } from '@/plugins/utils'
+import { diff } from 'just-diff' // '@/plugins/diff'
+import { strToMtx } from '@/plugins/utils'
 
 export default {
   name: 'PanelDiff',
@@ -87,9 +89,8 @@ export default {
       return this.$store.getters.current// .replace(/\r\n|\r|\n/g, '<br>')
     },
     diffOldCur () {
-      const _old = strToMtx(this.oldText, ' ')
-      const _cur = strToMtx(this.currentText, ' ')
-      const { a: old, b: cur } = fillEqual(_old, _cur)
+      const old = strToMtx(this.oldText, ' ')
+      const cur = strToMtx(this.currentText, ' ')
       let emptyOld = old.toString() === ''
 
       let emptyCur = cur.toString() === ''
@@ -98,7 +99,7 @@ export default {
       // console.info('cur:', emptyCur)
       console.table(cur)
 
-      let dif = (emptyOld && emptyCur) ? null : diff(old, cur)
+      const dif = (emptyOld && emptyCur) ? null : diff(old, cur)
       console.log('dif=', dif)
       // let delta = JSON.parse(JSON.stringify(old)); //copy `old`
       // then go through dif and change
@@ -106,13 +107,46 @@ export default {
       // Transform the matrix `old` into a lined text
       let res = []
       if (!emptyOld) {
-        console.log('Old is empty?', emptyOld)
-        // console.log('old=', old)
         res = old.map((line, idx) => {
           // console.log('line=', line, '#', idx)
           // res += `<tr><td class="line">${idx}</td>${line.length ? line/* .split(' ') */.map(col => '<td>' + col + '</td>') : `<td>${line}</td>`}</tr>`
-          return [idx, line.join(' ')]
+          return {
+            idx,
+            line: line.join(' '),
+            type: 'n/a'
+          }
         })
+
+        for (let d of dif) {
+          // console.log('d=', d)
+
+          let line = cur[d.path[0]]
+          console.log('line=', line)
+          // line[d.path[1]] = `<em>${d.value}</em>`
+
+          let data = {
+            idx: ` ${d.path[0]}`,
+            line: line ? line.join(' ') : '', // d.value,
+            type: d.op
+          }
+          if (d.op === 'replace') {
+            res.forEach(line => {
+              // eslint-disable-next-line eqeqeq
+              if (line.idx == d.path[0]) line.type = 'remove'
+            })
+            data.type = 'add'
+          }
+          if (d.op === 'remove') {
+            res.forEach(line => {
+              // eslint-disable-next-line eqeqeq
+              if (line.idx == d.path[0]) line.type = 'remove'
+            })
+            continue
+          }
+          res.push(data)
+        }
+
+        res = res.sort((a, b) => a.idx - b.idx)
       }
       console.log('res=', res)
       return res
@@ -123,13 +157,13 @@ export default {
 
 <style lang="scss" scoped>
   .plus { //green accent-3
-    background-color: #80ff80;
-    color: #0f0;
+    background-color:#f0fff4;
+    color: #22863a;
   }
 
   .minus { //red accent-3
-    background-color: #ff8080;
-    color: #f00;
+    background-color: #ffeef0;
+    color: #b31d28;
   }
 
   #diff {
