@@ -1,5 +1,7 @@
 # Predicted Result Review
 
+<em>This project was put on hold as it started when it wasn't fully needed and I ended up using a simpler tool.<br>If you want to contribute to it then feel free to do so.</em>
+
 [![NodeVersion](https://img.shields.io/node/v/predictedresultreview.svg)](https://github.com/Berkmann18/PredictedResultReview)
 [![GitHub package version](https://img.shields.io/github/package-json/v/Berkmann18/PredictedResultReview.svg)](https://github.com/Berkmann18/PredictedResultReview)
 [![devDependencies Status](https://david-dm.org/berkmann18/predictedresultreview/dev-status.svg)](https://david-dm.org/berkmann18/predictedresultreview?type=dev)
