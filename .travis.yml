@@ -5,14 +5,11 @@ cache:
 notifications:
   email: false
 node_js:
-  - 'node'
-  - '10'
-  - '9'
-  - '8'
-  - '6'
+  - 'stable'
+  - 'lts/*'
 install:
-  - npm i
-  - npm i -g jest codecov eslint
+  - npm ci
+  - npm i -g jest codecov eslint snyk
 script:
   - npm run lint
   - snyk auth $SNYK_TOKEN
@@ -33,5 +30,6 @@ branches:
   except:
     - /^v\d+\.\d+\.\d+$/
 stages:
+  - name: test
   - name: release
     if: branch = master
